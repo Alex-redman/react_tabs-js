@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 
-export const Tabs = ({ tabs, selectedTabId, onTabSelected }) => {
-  const selectedTab = tabs.find(tab => tab.id === selectedTabId) || tabs[0];
+export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
+  const activeTab = tabs.find(tab => tab.id === activeTabId) || tabs[0];
 
   return (
     <div data-cy="TabsComponent">
@@ -10,13 +10,13 @@ export const Tabs = ({ tabs, selectedTabId, onTabSelected }) => {
           {tabs.map(tab => (
             <li
               key={tab.id}
-              className={classNames({ 'is-active': selectedTab === tab })}
+              className={classNames({ 'is-active': activeTabId === tab.id })}
               data-cy="Tab"
             >
               <a
                 href={`#${tab.id}`}
                 data-cy="TabLink"
-                onClick={() => selectedTab !== tab && onTabSelected(tab)}
+                onClick={() => activeTabId !== tab.id && onTabSelected(tab)}
               >
                 {tab.title}
               </a>
@@ -25,7 +25,7 @@ export const Tabs = ({ tabs, selectedTabId, onTabSelected }) => {
         </ul>
       </div>
       <div className="block" data-cy="TabContent">
-        {selectedTab.content}
+        {activeTab.content}
       </div>
     </div>
   );
