@@ -1,6 +1,8 @@
 import classNames from 'classnames/bind';
 
 export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
+  const activeTab = tabs.find(tab => tab.id === activeTabId) || tabs[0];
+
   return (
     <div className="tabs is-boxed">
       <ul>
@@ -12,7 +14,7 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
           >
             <a
               onClick={() => {
-                if (tab.id !== activeTabId) {
+                if (tab.id !== activeTab) {
                   onTabSelected(tab.id);
                 }
               }}
